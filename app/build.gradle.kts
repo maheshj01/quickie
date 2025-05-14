@@ -2,12 +2,20 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
     namespace = "com.wml.quickie"
     compileSdk = 35
-
+    packaging {
+        resources {
+            pickFirsts += listOf(
+                "META-INF/gradle/incremental.annotation.processors"
+            )
+        }
+    }
     defaultConfig {
         applicationId = "com.wml.quickie"
         minSdk = 24
@@ -49,6 +57,12 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.room.runtime)
+    implementation("com.google.dagger:hilt-android:2.38.1")
+    implementation("com.google.dagger:hilt-android-compiler:2.37")
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    implementation("androidx.hilt:hilt-compiler:1.0.0")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation(libs.androidx.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

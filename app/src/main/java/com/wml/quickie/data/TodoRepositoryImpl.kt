@@ -4,10 +4,9 @@ import kotlinx.coroutines.flow.Flow
 
 class TodoRepositoryImpl(
     private val todoDao: TodoDao,
-    private val todoDatabase: TodoDatabase
 ) : TodoRepository {
-    override suspend fun getTodos(): Flow<List<Todo>> {
-        return todoDao.getTodos()
+    override fun getTodos(): Flow<List<Todo>> {
+        return todoDao.getTodos();
     }
 
     override suspend fun getById(id: Int): Todo? {
